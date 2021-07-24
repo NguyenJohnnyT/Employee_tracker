@@ -1,10 +1,10 @@
-const inquirer = require('inquirer');
-
 //* Update upon command these arrays with department names, roles, and managers
 const choiceDepts = []
 const choiceRoles = []
 const choiceManagers = ['None']
 const choiceEmpl = []
+
+//* Main array for base questions
 const mainQs = [ //!All questions will return to mainQs after prompt(s) competion
     'View All Employees', 
                 //* Display all employees (id, fn, ln, title, dept, salary, manager)
@@ -111,7 +111,11 @@ const addDeptQuestions = [
     }
 ]
 
-export {
+module.exports = {
+    choiceEmpl,
+    choiceDepts,
+    choiceManagers,
+    choiceRoles,
     baseQuestion,
     addEmplQuestions,
     updateEmplRoleQuestions,
