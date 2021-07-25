@@ -4,13 +4,13 @@ CREATE DATABASE superCOMPANY_db;
 USE superCOMPANY_db;
 
 CREATE TABLE department (
-    id INT NOT NULL,
+    id INT AUTO_INCREMENT NOT NULL,
     dept_name VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE roles (
-    id INT NOT NULL,
+    id INT AUTO_INCREMENT NOT NULL,
     title VARCHAR(30) NOT NULL,
     salary decimal NOT NULL,
     department_id INT,
@@ -20,7 +20,7 @@ CREATE TABLE roles (
 );
 
 CREATE TABLE employees (
-    id INT NOT NULL,
+    id INT AUTO_INCREMENT NOT NULL,
     fname VARCHAR(30) NOT NULL,
     lname VARCHAR(30) NOT NULL,
     role_id INT NOT NULL,

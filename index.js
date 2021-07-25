@@ -14,7 +14,7 @@ const db = mysql.createConnection(
       password: '!WuuL0R.QY=C',
       database: 'superCOMPANY_db'
     },
-    console.log(`Connected to the superCOMPANY_db database.`)
+    console.log('✅ Connected to the superCOMPANY_db database. ✅')
 );
 
 async function init() {
@@ -22,22 +22,24 @@ async function init() {
     let baseAns = await inquirer.prompt(pq.baseQuestion);
     if (baseAns.basedQ === 'Quit') {
       continuePrompt = false;
-      console.log('Good Bye');
+      console.log('✨ Goodbye! ✨');
       process.exit();
     } else {
       switch(baseAns.basedQ) {
         case 'View All Employees':
-          await hf.viewAllEmpl(db);
+          hf.viewAllEmpl(db);
           break;
         case 'Add Employee':
           break;
         case 'Update Employee Role':
           break;
         case 'View All Roles':
+          hf.viewAllRoles(db);
           break;
         case 'Add Role':
           break;
         case 'View All Departments':
+          hf.viewAllDepts(db);
           break;
         case 'Add Department':
           break;
