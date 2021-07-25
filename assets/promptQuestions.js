@@ -22,7 +22,8 @@ const mainQs = [ //!All questions will return to mainQs after prompt(s) competio
                 //* Displays id, title, dept name, salary of all roles
                 //! Console.table
 
-    'Add Role', //| Asks for role's name & salary & dept (-> 3 QUESTIONS)
+    'Add Role', 
+                //| Asks for role's name & salary & dept (-> 3 QUESTIONS)
                 //! Questions (name, salary, dept) === (input, input, choice [list is departments])
 
     'View All Departments', 
