@@ -19,9 +19,9 @@ VALUES
 (9, 'Marketing Staff', 80000, 4)
 ;
 
-INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
+INSERT INTO employees (id, fname, lname, role_id, mngr_id)
 VALUES
-(1, 'Mina',      'Myoui',   1, 1),
+(1, 'Mina',      'Myoui',   1, NULL),
 (2, 'Nayeon',    'Im',      2, 1),
 (3, 'Jeongyeon', 'Yoo',     3, 1),
 (4, 'Dahyun',    'Kim',     8, 1),

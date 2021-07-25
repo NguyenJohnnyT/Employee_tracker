@@ -6,10 +6,18 @@ const pq = require("./promptQuestions")
 async function viewAllEmpl (db) {
     const allEmpl = await db.connect((err) => {
         if (err) throw err;
-        db.query("SELECT * FROM employee", function (err, result, fields) {
+        db.query(
+            `SELECT e.id AS ID, e.fname AS 'First Name', e.lname as 'Last Name', roles.title AS Title, department.dept_name AS Department, roles.salary AS Salary, (SELECT fname FROM employees WHERE id = e.mngr_id) AS manager
+            FROM employees e
+            INNER JOIN roles ON e.role_id=roles.id
+            INNER JOIN department ON roles.department_id=department.id
+            ORDER BY e.id;
+            `,
+            function (err, result, fields) {
             if (err) throw err;
             console.log('\n');
             console.table(result);
+            console.log('\n\n\n\n\n\n')
         });
     });
 };

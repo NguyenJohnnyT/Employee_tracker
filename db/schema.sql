@@ -19,13 +19,13 @@ CREATE TABLE roles (
     ON DELETE SET NULL
 );
 
-CREATE TABLE employee (
+CREATE TABLE employees (
     id INT NOT NULL,
-    first_name VARCHAR(30) NOT NULL,
-    last_name VARCHAR(30) NOT NULL,
+    fname VARCHAR(30) NOT NULL,
+    lname VARCHAR(30) NOT NULL,
     role_id INT NOT NULL,
-    manager_id INT NOT NULL,
+    mngr_id INT,
     PRIMARY KEY (id),
     FOREIGN KEY (role_id) REFERENCES roles(id),
-    FOREIGN KEY (manager_id) REFERENCES employee(id)
+    FOREIGN KEY (mngr_id) REFERENCES employees(id)
 );

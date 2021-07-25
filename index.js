@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
+const cTable = require('console.table');
 const pq = require("./assets/promptQuestions"); //* imports arrays of current roles, employees, etc, and also prompt questions
 const hf = require("./assets/helperFunctions");
 
