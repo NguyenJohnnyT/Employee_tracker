@@ -49,6 +49,8 @@ async function init() {
           df.viewAllDepts(db);
           break;
         case 'Add Department':
+          let newDept = await inquirer.prompt(pq.addDeptQuestions);
+          df.addDept(newDept, db);
           break;
         default:
           console.log(`Error in selection ${baseAns.basedQ}, please debug`);

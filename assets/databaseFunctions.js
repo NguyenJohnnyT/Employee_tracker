@@ -170,6 +170,18 @@ function viewAllDepts (db) {
 //* Add Department
     //| Asks for name
     //! Question (name) === (input)
+function addDept (deptObj, db) { //deptObj = {addDept}
+    db.connect((err) => {
+        if(err) throw err;
+        db.query(
+            `INSERT INTO department (dept_name)
+            VALUES ('${deptObj.addDept}');`,
+            function (err, result) {
+                console.log(`New department ${dept.addDept} has been added!\n\n\n`)
+            }
+        )
+    });
+};
 
 module.exports = {
     viewAllEmpl,
@@ -177,5 +189,6 @@ module.exports = {
     viewAllDepts,
     changeRole,
     addRole,
-    addEmployee
+    addEmployee,
+    addDept
 }
