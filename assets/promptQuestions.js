@@ -99,7 +99,8 @@ const addRoleQuestions = [
     {
         name: 'roleDept',
         message: 'What department does the role belong to?',
-        type: choiceDepts
+        type: 'list',
+        choices: choiceDepts,
     }
 ]
 

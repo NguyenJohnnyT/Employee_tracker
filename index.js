@@ -40,6 +40,8 @@ async function init() {
           df.viewAllRoles(db);
           break;
         case 'Add Role':
+          let newRole = await inquirer.prompt(pq.addRoleQuestions);
+          df.addRole(newRole, db);
           break;
         case 'View All Departments':
           df.viewAllDepts(db);

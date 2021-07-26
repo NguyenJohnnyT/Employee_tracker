@@ -93,7 +93,23 @@ function viewAllRoles (db) {
 //* Add Role
     //| Asks for role's name & salary & dept (-> 3 QUESTIONS)
     //! Questions (name, salary, dept) === (input, input, choice [list is departments])
-
+function addRole (addObj, db) { // addObj = {addRoleName, roleSalary, roleDept}
+    db.connect((err) => {
+        if(err) throw err;
+        console.log(
+            `INSERT INTO roles (title, salary, department_id)
+            VALUES ('${addObj.addRoleName}', ${addObj.roleSalary}, (SELECT id FROM department WHERE dept_name = '${addObj.roleDept}'))`
+        )
+        db.query(
+            `INSERT INTO roles (title, salary, department_id)
+            VALUES ('${addObj.addRoleName}', ${addObj.roleSalary}, (SELECT id FROM department WHERE dept_name = '${addObj.roleDept}'));`,
+            function (err, result) {
+                if (err) throw err;
+                console.log(`New role ${addObj.addRoleName} (Salary: ${addObj.roleSalary} added to ${addObj.roleDept}!`)
+            }
+        )
+    });
+};
 
 //* View All Departments
     //* Display all departments (id, name)
@@ -124,4 +140,5 @@ module.exports = {
     viewAllRoles,
     viewAllDepts,
     changeRole,
+    addRole,
 }
