@@ -31,6 +31,8 @@ async function init() {
           df.viewAllEmpl(db);
           break;
         case 'Add Employee':
+          let newEmplObj = await inquirer.prompt(pq.addEmplQuestions);
+          df.addEmployee(newEmplObj, db);
           break;
         case 'Update Employee Role':
           let updateEmplRole = await inquirer.prompt(pq.updateEmplRoleQuestions);

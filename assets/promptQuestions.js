@@ -47,12 +47,12 @@ const baseQuestion = [
 
 const addEmplQuestions = [
     {
-        name: 'firstName',
+        name: 'fname',
         message: 'Employee first name?',
         type: 'input'
     },
     {
-        name: 'lastName',
+        name: 'lname',
         message: 'Employee last name?',
         type: 'input'
     },

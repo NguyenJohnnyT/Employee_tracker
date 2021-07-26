@@ -31,7 +31,47 @@ function viewAllEmpl (db) {
 //* Add Employee
     //|  Asks for empl fn, ln, role, manager
     //! Questions (fn, ln, role, maanger) === (input, input, choice[list of depts], choice [list of managers])
-
+function addEmployee (newEmployeeObj, db) { // newEmployeeObj {firstName, lastName, emplRole, emplManager}
+    if (newEmployeeObj.emplManager !== 'None') {
+        let firstLastName = newEmployeeObj.emplManager.split(' '); // [firstname, lastname]
+        db.connect((err) => {
+            if (err) throw err;
+            db.query(
+                `INSERT INTO employees (fname, lname, role_id, mngr_id)
+                VALUES ('${newEmployeeObj.fname}', 
+                '${newEmployeeObj.lname}', 
+                (SELECT id FROM roles WHERE roles.title = '${newEmployeeObj.emplRole}'),
+                (SELECT c.id FROM employees c WHERE c.fname = '${firstLastName[0]}' AND c.lname = '${firstLastName[1]}')
+                );
+                `,
+                function (err, result) {
+                    if (err) throw err;
+                    console.log(
+                        `Employee ${newEmployeeObj.fname} ${newEmployeeObj.lname} has been added as a/an ${newEmployeeObj.emplRole}!  ${newEmployeeObj.emplManager} is their manager.\n\n\n`
+                    )
+                }
+            )
+        });
+    } else {
+        db.connect((err) => {
+            if (err) throw err;
+            db.query(
+                `INSERT INTO employees (fname, lname, role_id, mngr_id)
+                VALUES ('${newEmployeeObj.fname}', 
+                '${newEmployeeObj.lname}', 
+                (SELECT id FROM roles WHERE roles.title = '${newEmployeeObj.emplRole}'),
+                null);
+                `,
+                function (err, result) {
+                    if (err) throw err;
+                    console.log(
+                        `Employee ${newEmployeeObj.fname} ${newEmployeeObj.lname} has been added as a/an ${newEmployeeObj.emplRole}!\n\n\n`
+                    )
+                }
+            )
+        });
+    }
+}
 
 //* Update Employee Role
     //| Asks for empl name, select role
@@ -96,10 +136,6 @@ function viewAllRoles (db) {
 function addRole (addObj, db) { // addObj = {addRoleName, roleSalary, roleDept}
     db.connect((err) => {
         if(err) throw err;
-        console.log(
-            `INSERT INTO roles (title, salary, department_id)
-            VALUES ('${addObj.addRoleName}', ${addObj.roleSalary}, (SELECT id FROM department WHERE dept_name = '${addObj.roleDept}'))`
-        )
         db.query(
             `INSERT INTO roles (title, salary, department_id)
             VALUES ('${addObj.addRoleName}', ${addObj.roleSalary}, (SELECT id FROM department WHERE dept_name = '${addObj.roleDept}'));`,
@@ -141,4 +177,5 @@ module.exports = {
     viewAllDepts,
     changeRole,
     addRole,
+    addEmployee
 }

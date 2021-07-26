@@ -55,6 +55,9 @@ const updateEmpl = async (db) => {
                     if (!choiceEmpl.includes(obj[concat])) {
                         choiceEmpl.push(obj[concat]);
                     };
+                    if (!choiceEmpl.includes('None')) {
+                        choiceEmpl.unshift('None');
+                    }
                 });
             }
         );
