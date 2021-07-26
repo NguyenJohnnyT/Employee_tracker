@@ -1,8 +1,7 @@
 //* Update upon command these arrays with department names, roles, and managers
-const choiceDepts = []
-const choiceRoles = []
-const choiceManagers = ['None']
-const choiceEmpl = []
+const choiceDepts = [];
+const choiceRoles = [];
+const choiceEmpl = [];
 
 //* Main array for base questions
 const mainQs = [ //!All questions will return to mainQs after prompt(s) competion
@@ -12,7 +11,7 @@ const mainQs = [ //!All questions will return to mainQs after prompt(s) competio
 
     'Add Employee', 
                 //|  Asks for empl fn, ln, role, manager
-                //! Questions (fn, ln, role, maanger) === (input, input, choice[list of depts], choice [list of managers])
+                //! Questions (fn, ln, role, manager) === (input, input, choice[list of depts], choice [list of employees])
 
     'Update Employee Role',
                 //| Asks for empl name, select role
@@ -67,7 +66,7 @@ const addEmplQuestions = [
         name: 'emplManager',
         message: 'Choose their manager, if applicable',
         type: 'list',
-        choices: choiceManagers,
+        choices: choiceEmpl,
     }
 ];
 
@@ -76,13 +75,13 @@ const updateEmplRoleQuestions = [
         name: 'updateEmpl',
         message: 'Choose an employee',
         type: 'list',
-        choice: choiceEmpl
+        choices: choiceEmpl
     },
     {
         name: 'changeRole',
         message: 'Choose a role to assign them',
         type: 'list',
-        choice: choiceRoles,
+        choices: choiceRoles,
     }
 ];
 
@@ -115,7 +114,6 @@ const addDeptQuestions = [
 module.exports = {
     choiceEmpl,
     choiceDepts,
-    choiceManagers,
     choiceRoles,
     baseQuestion,
     addEmplQuestions,

@@ -2,10 +2,10 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const cTable = require('console.table');
 const pq = require("./assets/promptQuestions"); //* imports arrays of current roles, employees, etc, and also prompt questions
+const df = require("./assets/databaseFunctions");
 const hf = require("./assets/helperFunctions");
 
 let continuePrompt = true
-console.log('pq.choiceManagers', pq.choiceManagers)
 
 const db = mysql.createConnection(
     {
@@ -19,6 +19,7 @@ const db = mysql.createConnection(
 
 async function init() {
   while (continuePrompt) {
+    await hf.updateAll(db);
     let baseAns = await inquirer.prompt(pq.baseQuestion);
     if (baseAns.basedQ === 'Quit') {
       continuePrompt = false;
@@ -27,19 +28,21 @@ async function init() {
     } else {
       switch(baseAns.basedQ) {
         case 'View All Employees':
-          hf.viewAllEmpl(db);
+          df.viewAllEmpl(db);
           break;
         case 'Add Employee':
           break;
         case 'Update Employee Role':
+          let updateEmplRole = await inquirer.prompt(pq.updateEmplRoleQuestions);
+          df.changeRole(updateEmplRole, db);
           break;
         case 'View All Roles':
-          hf.viewAllRoles(db);
+          df.viewAllRoles(db);
           break;
         case 'Add Role':
           break;
         case 'View All Departments':
-          hf.viewAllDepts(db);
+          df.viewAllDepts(db);
           break;
         case 'Add Department':
           break;
