@@ -1,6 +1,3 @@
-const pq = require("./promptQuestions");
-// TODO: Functions for each mainQ answers
-
 //* View All Employees
      //* Display all employees (id, fn, ln, title, dept, salary, manager)
     //! Console.table
@@ -282,6 +279,26 @@ function changeManager (changeManagerQuery, db) {
     });
 };
 
+function viewSalary (db) {
+    db.connect((err) => {
+        if (err) throw err;
+        db.query(
+            `SELECT department.dept_name AS Department, 
+            SUM(roles.salary) AS 'Combined Salaries'
+            FROM department
+            JOIN roles on roles.department_id = department.id
+            GROUP BY department.dept_name
+            `,
+            function (err, result) {
+                if (err) throw err;
+                console.log('\n');
+                console.table(result);
+                console.log('\n\n\n\n');
+            }
+        )
+    })
+}
+
 module.exports = {
     viewAllEmpl,
     viewAllRoles,
@@ -292,5 +309,6 @@ module.exports = {
     addDept,
     viewEmplByManager,
     viewEmplByDept,
-    changeManager
+    viewSalary,
+    changeManager,
 }

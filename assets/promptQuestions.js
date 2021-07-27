@@ -12,32 +12,30 @@ const mainQs = [ //!All questions will return to mainQs after prompt(s) competio
     'Add Employee', 
                 //|  Asks for empl fn, ln, role, manager
                 //! Questions (fn, ln, role, manager) === (input, input, choice[list of depts], choice [list of employees])
-
-    'Update Employee Role',
-                //| Asks for empl name, select role
-                //! Questions (name, role) === (choice [list employees], choice[list roles])
-
-    'View All Roles', 
-                //* Displays id, title, dept name, salary of all roles
-                //! Console.table
-
-    'Add Role', 
-                //| Asks for role's name & salary & dept (-> 3 QUESTIONS)
-                //! Questions (name, salary, dept) === (input, input, choice [list is departments])
-
-    'View All Departments', 
-                //* Display all departments (id, name)
-                //! Console.table
-
-    'Add Department', 
-                //| Asks for name
-                //! Question (name) === (input)
     'View employees by manager',
                 //| Choose between list of employees
                 //! Question (name) === (choice)
     'View employees by department',
                 //| Choose between list of departments
                 //! Question (name) === (choice)
+    'Update Employee Role',
+                //| Asks for empl name, select role
+                //! Questions (name, role) === (choice [list employees], choice[list roles])
+    'View All Roles', 
+                //* Displays id, title, dept name, salary of all roles
+                //! Console.table
+    'Add Role', 
+                //| Asks for role's name & salary & dept (-> 3 QUESTIONS)
+                //! Questions (name, salary, dept) === (input, input, choice [list is departments])
+    'View All Departments', 
+                //* Display all departments (id, name)
+                //! Console.table
+    'View Combined Salaries of Individual Departments',
+                //* Displays each department total budget
+                //! Console.table
+    'Add Department', 
+                //| Asks for name
+                //! Question (name) === (input)
     'Change employee\'s manager',
                 //| Choose between list of employees
                 //! Question (name) === (choice)

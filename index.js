@@ -65,6 +65,9 @@ async function init() {
           let deptQuery = await inquirer.prompt(pq.viewEmplByDeptQuestions);
           df.viewEmplByDept(deptQuery, db);
           break;
+        case 'View Combined Salaries of Individual Departments':
+          df.viewSalary(db);
+          break
         default:
           console.log(`Error in selection ${baseAns.basedQ}, please debug`);
       };
