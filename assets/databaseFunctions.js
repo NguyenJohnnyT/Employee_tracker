@@ -103,7 +103,7 @@ function changeRole (updateObj, db) {
             function (err, result, fields) {
                 if (err) throw err;
                 console.log('\n');
-                console.log(`${updateObj.updateEmpl}'s role changed from ${oldRole} to ${newRole}!`)
+                console.log(`${updateObj.updateEmpl}'s role changed from ${oldRole} to ${newRole}!\n\n\n\n\n`)
             }
         )
     })
@@ -139,10 +139,10 @@ function addRole (addObj, db) { // addObj = {addRoleName, roleSalary, roleDept}
         if(err) throw err;
         db.query(
             `INSERT INTO roles (title, salary, department_id)
-            VALUES ('${addObj.addRoleName}', ${addObj.roleSalary}, (SELECT id FROM department WHERE dept_name = '${addObj.roleDept}'));`,
+            VALUES ('${addObj.addRoleName}', ${addObj.roleSalary}, (SELECT id FROM department WHERE dept_name = '${addObj.roleDept}\n\n\n\n\n'));`,
             function (err, result) {
                 if (err) throw err;
-                console.log(`New role ${addObj.addRoleName} (Salary: ${addObj.roleSalary} added to ${addObj.roleDept}!`)
+                console.log(`New role ${addObj.addRoleName} (Salary: ${addObj.roleSalary} added to ${addObj.roleDept}!\n\n\n\n\n`)
             }
         )
     });
@@ -260,8 +260,6 @@ function changeManager (changeManagerQuery, db) {
     };
     let fnamelnameEmpl = changeManagerQuery.changeManagerEmployee.split(' ');
     let fnamelnameManager = changeManagerQuery.changeManager.split(' ')
-    console.log('employee', fnamelnameEmpl);
-    console.log('manager', fnamelnameManager);
     db.connect ((err) => {
         if (err) throw err;
         db.query(
@@ -269,7 +267,6 @@ function changeManager (changeManagerQuery, db) {
             function (err, result) {
                 if (err) throw err;
                 newID = result[0].id;
-                console.log ('manager id', newID);
                 db.query(
                     `UPDATE employees
                     SET employees.mngr_id = ?
