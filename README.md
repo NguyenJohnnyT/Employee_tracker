@@ -24,6 +24,7 @@ This nodejs application uses inquirer, mysql2, and console.table packages to hel
 <li>Add an employee to the database</li>
 <li>Update an employee role</li>
 <li>Update an employee's manager</li>
+<li>View combined salary of each department</li>
 </ol>
 
 ## Installation

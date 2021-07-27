@@ -23,7 +23,6 @@ function viewAllEmpl (db) {
             console.log('\n\n\n\n\n\n');
             });
     });
-    setTimeout(() => {}, 1000);
 };
 
 //* Add Employee
@@ -310,5 +309,5 @@ module.exports = {
     viewEmplByManager,
     viewEmplByDept,
     viewSalary,
-    changeManager,
+    changeManager
 }
