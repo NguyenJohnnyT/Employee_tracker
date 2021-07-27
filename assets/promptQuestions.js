@@ -35,6 +35,9 @@ const mainQs = [ //!All questions will return to mainQs after prompt(s) competio
     'View employees by manager',
                 //| Choose between list of employees
                 //! Question (name) === (choice)
+    'View employees by department',
+                //| Choose between list of departments
+                //! Question (name) === (choice)
     'Quit'
 ];
 
@@ -123,6 +126,15 @@ const viewEmplByManagerQuestions = [
         choices: choiceEmpl,
         type: 'list'
     }
+];
+
+const viewEmplByDeptQuestions = [
+    {
+        name: 'viewEmplByDept',
+        message: 'Which department do you wish to query?',
+        choices: choiceDepts,
+        type: 'list'
+    }
 ]
 
 const cont = [
@@ -143,5 +155,6 @@ module.exports = {
     addRoleQuestions,
     addDeptQuestions,
     viewEmplByManagerQuestions,
+    viewEmplByDeptQuestions,
     cont
 }

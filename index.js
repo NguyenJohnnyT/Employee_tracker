@@ -55,7 +55,15 @@ async function init() {
         case 'View employees by manager':
           let managerQuery = await inquirer.prompt(pq.viewEmplByManagerQuestions);
           df.viewEmplByManager(managerQuery, db);
-          break
+          break;
+        case 'View employees by department':
+          let deptQuery = await inquirer.prompt(pq.viewEmplByDeptQuestions);
+          df.viewEmplByDept(deptQuery, db);
+          break;
+        case 'Change employee\'s manager':
+          let changeManagerQuery = await inquirer.prompt(pq.changeManagerQuestions);
+          df.changeManager(changeMangerQuery, db);
+          break;
         default:
           console.log(`Error in selection ${baseAns.basedQ}, please debug`);
       };

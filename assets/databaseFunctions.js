@@ -219,6 +219,41 @@ function viewEmplByManager (managerQuery, db) { //managerQuery = {viewEmplByMana
     })
 }
 
+function viewEmplByDept (deptQuery, db) { //deptQuery = {viewEmplByDept}
+    let dept = deptQuery.viewEmplByDept;
+    db.connect((err) => {
+        if (err) throw err;
+        db.query(
+            `SELECT d.id AS id FROM department d WHERE d.dept_name = ?;`,
+            [dept],
+            function (err, result) {
+                if (err) throw err;
+                newID = result[0].id;
+                db.query(
+                    `
+                    SELECT CONCAT(employees.fname, ' ', employees.lname) AS Employees,
+                    department.dept_name AS department
+                    FROM employees
+                    INNER JOIN roles ON roles.id = employees.role_id
+                    INNER JOIN department ON department.id = roles.department_id
+                    WHERE department.id= ?;
+                    `, [newID],
+                    function (err,result) {
+                        if (err) throw err;
+                        if (result.length === 0) {
+                            console.log(`\n${dept} does not have any employees..\n\n\n\n\n`);
+                        } else {
+                            console.log('\n');
+                            console.table(result);
+                            console.log('\n\n\n\n');
+                        }
+                    }
+                );
+            }
+        )
+    })
+}
+
 module.exports = {
     viewAllEmpl,
     viewAllRoles,
@@ -227,5 +262,6 @@ module.exports = {
     addRole,
     addEmployee,
     addDept,
-    viewEmplByManager
+    viewEmplByManager,
+    viewEmplByDept
 }
