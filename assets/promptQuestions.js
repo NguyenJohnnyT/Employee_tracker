@@ -38,6 +38,9 @@ const mainQs = [ //!All questions will return to mainQs after prompt(s) competio
     'View employees by department',
                 //| Choose between list of departments
                 //! Question (name) === (choice)
+    'Change employee\'s manager',
+                //| Choose between list of employees
+                //! Question (name) === (choice)
     'Quit'
 ];
 
@@ -135,7 +138,23 @@ const viewEmplByDeptQuestions = [
         choices: choiceDepts,
         type: 'list'
     }
+];
+
+const changeManagerQuestions = [
+    {
+        name: 'changeManagerEmployee',
+        message: 'Choose an employee (Selecting "None" will result in no changes)',
+        choices: choiceEmpl,
+        type: 'list',
+    },
+    {
+        name: 'changeManager',
+        message: 'Choose their new manager or none at all',
+        choices: choiceEmpl,
+        type: 'list'
+    }
 ]
+
 
 const cont = [
     {
@@ -156,5 +175,6 @@ module.exports = {
     addDeptQuestions,
     viewEmplByManagerQuestions,
     viewEmplByDeptQuestions,
+    changeManagerQuestions,
     cont
 }

@@ -254,6 +254,37 @@ function viewEmplByDept (deptQuery, db) { //deptQuery = {viewEmplByDept}
     })
 }
 
+function changeManager (changeManagerQuery, db) {
+    if (changeManagerQuery.changeManagerEmployee === 'None') {
+        return console.log('\nNothing changed\n\n\n\n\n')
+    };
+    let fnamelnameEmpl = changeManagerQuery.changeManagerEmployee.split(' ');
+    let fnamelnameManager = changeManagerQuery.changeManager.split(' ')
+    console.log('employee', fnamelnameEmpl);
+    console.log('manager', fnamelnameManager);
+    db.connect ((err) => {
+        if (err) throw err;
+        db.query(
+            `SELECT m.id AS id FROM employees m WHERE m.fname = ? AND m.lname = ?;`, [fnamelnameManager[0], fnamelnameManager[1]],
+            function (err, result) {
+                if (err) throw err;
+                newID = result[0].id;
+                console.log ('manager id', newID);
+                db.query(
+                    `UPDATE employees
+                    SET employees.mngr_id = ?
+                    WHERE employees.fname = ? AND employees.lname = ?;
+                    `, [newID, fnamelnameEmpl[0], fnamelnameEmpl[1]],
+                    function (err, result) {
+                        if (err) throw err;
+                        console.log(`${changeManagerQuery.changeManagerEmployee}'s manager changed to ${changeManagerQuery.changeManager}!\n\n\n\n\n`)
+                    }
+                );
+            }
+        )
+    });
+};
+
 module.exports = {
     viewAllEmpl,
     viewAllRoles,
@@ -263,5 +294,6 @@ module.exports = {
     addEmployee,
     addDept,
     viewEmplByManager,
-    viewEmplByDept
+    viewEmplByDept,
+    changeManager
 }
