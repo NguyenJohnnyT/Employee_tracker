@@ -1,6 +1,6 @@
 const {choiceDepts, choiceRoles, choiceEmpl} = require('./promptQuestions');
 
-let concat = "CONCAT(fname, ' ', lname)"
+let concat = "CONCAT(fname, ' ', lname)";
 //* updateAll runs four functions updateDepts, updateRoles, updateEmpl that each return an updated array of choices for their respective descriptors [DONE]
 const updateAll = async (db) => {
     await updateDepts(db);

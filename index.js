@@ -2,12 +2,12 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const cTable = require('console.table');
 const pq = require("./assets/promptQuestions"); //* imports arrays of current roles, employees, etc, and also prompt questions
-const df = require("./assets/databaseFunctions");
-const hf = require("./assets/helperFunctions");
+const df = require("./assets/databaseFunctions"); //* imports functions that will read/write into the database
+const hf = require("./assets/helperFunctions"); //* imports functions that will update arrays containing departments, roles, and employees
 
-let continuePrompt = true
+let continuePrompt = true;
 
-const db = mysql.createConnection(
+const db = mysql.createConnection( //connect to mySQL
     {
       host: 'localhost',
       user: 'root',
@@ -19,7 +19,7 @@ const db = mysql.createConnection(
 
 async function init() {
   while (continuePrompt) {
-    await hf.updateAll(db);
+    hf.updateAll(db);
     let baseAns = await inquirer.prompt(pq.baseQuestion);
     if (baseAns.basedQ === 'Quit') {
       continuePrompt = false;
@@ -52,11 +52,15 @@ async function init() {
           let newDept = await inquirer.prompt(pq.addDeptQuestions);
           df.addDept(newDept, db);
           break;
+        case 'View employees by manager':
+          let managerQuery = await inquirer.prompt(pq.viewEmplByManagerQuestions);
+          df.viewEmplByManager(managerQuery, db);
+          break
         default:
           console.log(`Error in selection ${baseAns.basedQ}, please debug`);
       };
     };
-  };
+  }
 };
 
 init();

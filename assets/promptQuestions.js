@@ -32,8 +32,11 @@ const mainQs = [ //!All questions will return to mainQs after prompt(s) competio
     'Add Department', 
                 //| Asks for name
                 //! Question (name) === (input)
+    'View employees by manager',
+                //| Choose between list of employees
+                //! Question (name) === (choice)
     'Quit'
-]
+];
 
 //* Main questions, follow up questions
 const baseQuestion = [
@@ -41,9 +44,10 @@ const baseQuestion = [
         name: 'basedQ',
         message: 'What would you like to do?',
         type: 'list',
-        choices: mainQs
+        choices: mainQs,
+        pageSize: 4,
     }
-]
+];
 
 const addEmplQuestions = [
     {
@@ -102,13 +106,30 @@ const addRoleQuestions = [
         type: 'list',
         choices: choiceDepts,
     }
-]
+];
 
 const addDeptQuestions = [
     {
         name: 'addDept',
         message: 'What is the name of the department?',
         type: 'input'
+    }
+];
+
+const viewEmplByManagerQuestions = [
+    {
+        name: 'viewEmplByManager',
+        message: 'Which employee do you wish to query?',
+        choices: choiceEmpl,
+        type: 'list'
+    }
+]
+
+const cont = [
+    {
+        name: 'continue',
+        message: 'Continue?',
+        type: 'confirm'
     }
 ]
 
@@ -120,5 +141,7 @@ module.exports = {
     addEmplQuestions,
     updateEmplRoleQuestions,
     addRoleQuestions,
-    addDeptQuestions
+    addDeptQuestions,
+    viewEmplByManagerQuestions,
+    cont
 }

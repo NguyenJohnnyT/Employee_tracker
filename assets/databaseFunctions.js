@@ -24,8 +24,9 @@ function viewAllEmpl (db) {
             console.log('\n');
             console.table(result);
             console.log('\n\n\n\n\n\n');
-        });
+            });
     });
+    setTimeout(() => {}, 1000);
 };
 
 //* Add Employee
@@ -171,17 +172,52 @@ function viewAllDepts (db) {
     //| Asks for name
     //! Question (name) === (input)
 function addDept (deptObj, db) { //deptObj = {addDept}
+    newDept = deptObj.addDept;
     db.connect((err) => {
         if(err) throw err;
         db.query(
             `INSERT INTO department (dept_name)
-            VALUES ('${deptObj.addDept}');`,
+            VALUES (?);`, [newDept],
             function (err, result) {
+                if (err) throw err;
                 console.log(`New department ${dept.addDept} has been added!\n\n\n`)
             }
         )
     });
 };
+
+function viewEmplByManager (managerQuery, db) { //managerQuery = {viewEmplByManager}
+    let firstLastName = managerQuery.viewEmplByManager.split(' ');
+    db.connect((err) => {
+        if (err) throw err;
+        db.query(
+            `SELECT e.id AS id FROM employees e WHERE e.fname = ? AND e.lname = ?;`,
+            [firstLastName[0], firstLastName[1]],
+            function (err, result) {
+                if (err) throw err;
+                // console.log('result', result);
+                newID = result[0].id;
+                db.query(
+                    `
+                    SELECT CONCAT(e.fname, ' ', e.lname) AS Employees,
+                    (SELECT CONCAT(fname, ' ', lname) FROM employees WHERE id = e.mngr_id) AS Manager
+                    FROM employees e WHERE e.mngr_id = ?;
+                    `, [newID],
+                    function (err,result) {
+                        if (err) throw err;
+                        if (result.length === 0) {
+                            console.log(`\n${managerQuery.viewEmplByManager} does not manage any employees..\n\n\n\n\n`);
+                        } else {
+                            console.log('\n');
+                            console.table(result);
+                            console.log('\n\n\n\n');
+                        }
+                    }
+                );
+            }
+        )
+    })
+}
 
 module.exports = {
     viewAllEmpl,
@@ -190,5 +226,6 @@ module.exports = {
     changeRole,
     addRole,
     addEmployee,
-    addDept
+    addDept,
+    viewEmplByManager
 }
