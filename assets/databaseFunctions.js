@@ -135,7 +135,7 @@ function addRole (addObj, db) { // addObj = {addRoleName, roleSalary, roleDept}
         if(err) throw err;
         db.query(
             `INSERT INTO roles (title, salary, department_id)
-            VALUES ('${addObj.addRoleName}', ${addObj.roleSalary}, (SELECT id FROM department WHERE dept_name = '${addObj.roleDept}\n\n\n\n\n'));`,
+            VALUES ('${addObj.addRoleName}', ${addObj.roleSalary}, (SELECT id FROM department WHERE dept_name = '${addObj.roleDept}'\n\n\n\n\n));`,
             function (err, result) {
                 if (err) throw err;
                 console.log(`New role ${addObj.addRoleName} (Salary: ${addObj.roleSalary} added to ${addObj.roleDept}!\n\n\n\n\n`)
